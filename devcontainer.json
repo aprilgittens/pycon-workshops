@@ -1,7 +1,10 @@
 {
-  "name": "Python Quiz Workshop",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  "postStartCommand": "bash reset-all.sh",
+  "name": "PyCon Workshops",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "postStartCommand": "npm install -g @github/copilot && bash reset-all.sh",
   "customizations": {
     "vscode": {
       "extensions": [
