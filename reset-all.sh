@@ -4,8 +4,8 @@
 
 echo "🔄 Resetting all workshops to clean state..."
 
-bash workshop-1-quiz/reset.sh
-# bash workshop-2-xxx/reset.sh
-# bash workshop-3-xxx/reset.sh
+bash workshop-ghcp-cli/reset.sh
+bash workshop-documentdb/reset.sh
+bash workshop-postgressql/reset.sh
 
 echo "✅ All workshops ready to go!"
