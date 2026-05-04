@@ -5,11 +5,13 @@
     "ghcr.io/devcontainers/features/node:1": {}
   },
   "postStartCommand": "npm install -g @github/copilot && bash reset-all.sh",
+  "postAttachCommand": "code --open-url 'vscode://vscode.markdown-language-features/markdown-preview?${localWorkspaceFolder}/README.md'",
   "customizations": {
     "vscode": {
       "extensions": [
         "GitHub.copilot",
-        "GitHub.copilot-chat"
+        "GitHub.copilot-chat",
+        "ms-python.python"
       ]
     }
   }
