@@ -1,0 +1,13 @@
+{
+  "name": "Python Quiz Workshop",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "postStartCommand": "bash reset-all.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ]
+    }
+  }
+}
