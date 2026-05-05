@@ -2,7 +2,7 @@ from os import environ
 from dotenv import load_dotenv
 from pymongo import MongoClient, database
 from jsondataloader import JSONDataLoader
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import AzureOpenAIEmbeddings
 from langchain_community.vectorstores.azure_cosmos_db import AzureCosmosDBVectorSearch, CosmosDBSimilarityType
 
 
@@ -14,6 +14,37 @@ class CosmosDBLoader():
     self, DB_Name):
         self.MONGO_CONNECTION_STRING = environ.get("MONGO_CONNECTION_STRING")
         self.DB_NAME = DB_Name
+
+
+    def __get_embeddings_client(self):
+        """Build Azure OpenAI embeddings client from required environment variables."""
+        azure_endpoint = environ.get("AZURE_OPENAI_ENDPOINT")
+        azure_api_key = environ.get("AZURE_OPENAI_API_KEY")
+        azure_api_version = environ.get("AZURE_OPENAI_API_VERSION")
+        azure_deployment = environ.get("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+        missing = []
+        if not azure_endpoint:
+            missing.append("AZURE_OPENAI_ENDPOINT")
+        if not azure_api_key:
+            missing.append("AZURE_OPENAI_API_KEY")
+        if not azure_api_version:
+            missing.append("AZURE_OPENAI_API_VERSION")
+        if not azure_deployment:
+            missing.append("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+
+        if missing:
+            missing_vars = ", ".join(missing)
+            raise ValueError(
+                f"Missing required Azure OpenAI settings: {missing_vars}. "
+                "Update your .env before running the loader."
+            )
+
+        return AzureOpenAIEmbeddings(
+            azure_endpoint=azure_endpoint,
+            api_key=azure_api_key,
+            api_version=azure_api_version,
+            azure_deployment=azure_deployment,
+        )
 
 
     def __collection_exists(self,db:database, collection_name:str)->bool:
@@ -67,7 +98,7 @@ class CosmosDBLoader():
             #load documents into Cosmos DB Vector Store
             vector_store = AzureCosmosDBVectorSearch.from_documents(
                 docs,
-                OpenAIEmbeddings(disallowed_special=()),
+                self.__get_embeddings_client(),
                 collection=collection,
                 index_name=INDEX_NAME)        
 
