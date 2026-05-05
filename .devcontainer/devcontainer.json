@@ -4,8 +4,8 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": {}
   },
-  "postCreateCommand": "pip install pytest fastapi uvicorn weaviate-client==3.24.1 python-dotenv==1.0.0 pymongo==4.6.3 tiktoken langchain-openai==0.1.1 langchain==0.1.14 langchain-community==0.0.31 langchain-mongodb==0.1.3 openai==1.16.2 azure-storage-blob azure-identity langchain-core==0.1.33",
-  "postStartCommand": "npm install -g @github/copilot && bash reset-all.sh",
+  "postCreateCommand": "python -m pip install --upgrade pip && python -m pip install --no-cache-dir pytest fastapi uvicorn weaviate-client==3.24.1 python-dotenv==1.0.0 pymongo==4.6.3 tiktoken langchain-openai==0.1.1 langchain==0.1.14 langchain-community==0.0.31 langchain-mongodb==0.1.3 openai==1.16.2 azure-storage-blob azure-identity langchain-core==0.1.33",
+  "postStartCommand": "bash reset-all.sh",
   "postAttachCommand": "code --open-url 'vscode://vscode.markdown-language-features/markdown-preview?${localWorkspaceFolder}/README.md'",
   "customizations": {
     "vscode": {
