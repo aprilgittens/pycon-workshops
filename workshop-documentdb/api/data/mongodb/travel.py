@@ -4,8 +4,6 @@ from typing import List, Optional, Union
 
 from model.travel import Ship,Itinerary
 
-import locale
-
 
 def results_to_ship(result:Document) -> Ship:
     return Ship(name = result.metadata["name"],
@@ -27,6 +25,10 @@ def get_ship_by_name(name:str)->str:
         return ''
 
 
+def format_currency(amount: float) -> str:
+    return f"${amount:,.2f}"
+
+
 def itnerary_search(name:str) -> list[Itinerary]:
     data = []
     db = client["travel"]
@@ -35,10 +37,9 @@ def itnerary_search(name:str) -> list[Itinerary]:
     if id != '':
         print(id)
         cursor  = collection_name.find({'ship.shipid':id})
-        locale.setlocale( locale.LC_ALL, '' )
         for item in cursor:
             data.append(Itinerary(ShipID=item['ship']['shipid'],
-                                Name=item['name'], Rooms=[f" room {p['name']} price {locale.currency(p['price'])} " for p in item['prices']],
+                                Name=item['name'], Rooms=[f" room {p['name']} price {format_currency(p['price'])} " for p in item['prices']],
                                 Schedule=[f" day {p['Day']} {p['type']} location {p['location']} " for p in item['itinerary']]
                         ))
         print(data)

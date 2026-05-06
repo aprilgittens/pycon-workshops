@@ -8,14 +8,7 @@ from model.travel import Ship
 def vacation_lookup(input: str) -> str:
     """find information on vacations and trips"""
 
-    # CHALLENGE: Try adjusting this threshold (0.0 - 1.0).
-    # Higher values (e.g. 0.90) return only very close matches — the agent may
-    # find fewer or no results for vague queries.
-    # Lower values (e.g. 0.50) cast a wider net — results may be less relevant.
-    SIMILARITY_THRESHOLD = 0.75
-
-    results = travel.similarity_search_with_score(input, k=4)
-    ships = [doc for doc, score in results if score >= SIMILARITY_THRESHOLD]
+    ships = travel.similarity_search(input)
 
     content = ""
     for ship in ships:

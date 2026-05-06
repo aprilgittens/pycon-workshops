@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from os import environ
 from langchain.globals import set_llm_cache
-from langchain_openai import ChatOpenAI
+from langchain_openai import AzureChatOpenAI
 from langchain_mongodb.chat_message_histories import MongoDBChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -11,12 +11,47 @@ from service import TravelAgentTools as agent_tools
 load_dotenv(override=False)
 
 
-chat : ChatOpenAI | None=None
+chat : AzureChatOpenAI | None=None
 agent_with_chat_history : RunnableWithMessageHistory | None=None
+
+
+def get_chat_client() -> AzureChatOpenAI:
+    azure_endpoint = environ.get("AZURE_OPENAI_ENDPOINT")
+    azure_api_key = environ.get("AZURE_OPENAI_API_KEY")
+    azure_api_version = environ.get("AZURE_OPENAI_API_VERSION")
+    azure_deployment = (
+        environ.get("AZURE_OPENAI_CHAT_DEPLOYMENT")
+        or environ.get("AZURE_OPENAI_DEPLOYMENT")
+    )
+
+    missing = []
+    if not azure_endpoint:
+        missing.append("AZURE_OPENAI_ENDPOINT")
+    if not azure_api_key:
+        missing.append("AZURE_OPENAI_API_KEY")
+    if not azure_api_version:
+        missing.append("AZURE_OPENAI_API_VERSION")
+    if not azure_deployment:
+        missing.append("AZURE_OPENAI_CHAT_DEPLOYMENT")
+
+    if missing:
+        missing_vars = ", ".join(missing)
+        raise ValueError(
+            f"Missing required Azure OpenAI settings: {missing_vars}. "
+            "Set them in your environment or .env file before starting the API."
+        )
+
+    return AzureChatOpenAI(
+        azure_endpoint=azure_endpoint,
+        api_key=azure_api_key,
+        api_version=azure_api_version,
+        azure_deployment=azure_deployment,
+        temperature=0,
+    )
 
 def LLM_init():
     global chat,agent_with_chat_history
-    chat = ChatOpenAI(model_name="gpt-3.5-turbo-16k",temperature=0)
+    chat = get_chat_client()
     tools = [agent_tools.vacation_lookup, agent_tools.itinerary_lookup, agent_tools.book_cruise ]
 
     prompt = ChatPromptTemplate.from_messages(
