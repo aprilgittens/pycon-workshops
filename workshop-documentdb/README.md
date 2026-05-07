@@ -4,7 +4,7 @@ Ever wonder what's happening when an AI agent "remembers" things? Run this trave
 
 ---
 
-### Inspect what Azure DocumentDB is doing (2 min)
+## Inspect what Azure DocumentDB is doing (2 min)
 
 Before running the agent, take a look at the three tools it uses to read from and write to Azure DocumentDB.
 
@@ -19,7 +19,7 @@ Before running the agent, take a look at the three tools it uses to read from an
 
 ---
 
-### View the Stored Documents in the Azure DocumentDB Collections (2 min)
+## View the Stored Documents in the Azure DocumentDB Collections (2 min)
 
 Browse the raw data the agent is working with — cruise ships and destinations already loaded into Azure DocumentDB.
 
@@ -33,7 +33,7 @@ Mention that the extension makes it possible to view.
 
 ---
 
-### Start the API (1 min)
+## Start the API (1 min)
 
 Spin up the FastAPI server that hosts the travel agent.
 
@@ -43,7 +43,7 @@ Spin up the FastAPI server that hosts the travel agent.
 
 ---
 
-### Get a Session ID (30 seconds)
+## Get a Session ID (30 seconds)
 
 The agent uses a session ID to tie your conversation turns together and persist history in DocumentDB.
 
@@ -53,7 +53,7 @@ The agent uses a session ID to tie your conversation turns together and persist 
 
 ---
 
-### Chat with the AI Travel Agent (2 min)
+## Chat with the AI Travel Agent (2 min)
 
 Ask the agent about travel destinations and cruise ships — each response is grounded in data retrieved directly from Azure DocumentDB.
 
@@ -81,7 +81,7 @@ Ask the agent about travel destinations and cruise ships — each response is gr
 
 ---
 
-### Book a Cruise (1 min)
+## Book a Cruise (1 min)
 
 Put the agent to work by booking a cruise — it'll ask for the details it needs and write the booking record to DocumentDB.
 
@@ -98,7 +98,7 @@ Put the agent to work by booking a cruise — it'll ask for the details it needs
 
 ---
 
-### Review Conversation History (1.5 min)
+## Review Conversation History (1.5 min)
 
 1. In the editor, open the **Azure** extension.
 1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
@@ -108,7 +108,7 @@ Put the agent to work by booking a cruise — it'll ask for the details it needs
 
 ---
 
-### Reflection
+## Reflection
 
 Take a moment to connect what you just did to the Azure DocumentDB capabilities that made it possible.
 
