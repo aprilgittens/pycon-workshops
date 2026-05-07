@@ -1,120 +1,123 @@
-# Workshop 2: Build an AI Travel Agent with Azure DocumentDB
+# AI Travel Agent with Azure DocumentDB
 
-Build an autonomous AI travel agent that uses **Azure DocumentDB** as its unified memory system — handling vector search, document storage, and conversation history all in one database.
-
-Based on the [Microsoft Learn tutorial: Build an AI travel agent with LangChain](https://learn.microsoft.com/en-us/azure/documentdb/tutorial-ai-agent).
+Ever wonder what's happening when an AI agent "remembers" things? Run this travel agent, dig into the code, and watch Azure DocumentDB do the heavy lifting — vector search, document storage, and conversation history all at once!
 
 ---
 
-## Overview
+### Inspect what Azure DocumentDB is doing (2 min)
 
-In this workshop you'll run a Python FastAPI backend that hosts an AI agent built with LangChain. The agent answers natural language travel queries by grounding its responses against real cruise data stored in Azure DocumentDB — using vector similarity search to find relevant ships, document lookups to retrieve itineraries, and writes to record bookings and persist conversation history.
+Before running the agent, take a look at the three tools it uses to read from and write to Azure DocumentDB.
 
-The travel data is already loaded into the shared Azure DocumentDB cluster. You're here to run the agent, explore how it queries DocumentDB, and get hands-on with the vector search behavior.
+1. In the **Explorer** of the editor, navigate to **workshop-documentdb** > **api** > **service** > **TravelAgentTools.py**.
+1. View what each tool does: 
 
-**Duration:** ~10 minutes
-
----
-
-## What's in the repo
-
-```
-/loader     # Data loading scripts (pre-run by facilitator — do not run again)
-/api        # Python FastAPI project — this is what you'll work with
-/web        # React frontend (not used in this workshop)
-```
+  | Tool | What it does |
+  |---|---|
+  | `vacation_lookup` | Runs a **vector similarity search** against the `ships` collection to find destinations & cruises |
+  | `itinerary_lookup` | Retrieves cruise package details and schedules for a specific ship |
+  | `book_cruise` | Writes a booking document to DocumentDB and validates passenger info |
 
 ---
 
-## Workshop Steps
+### View the Stored Documents in the Azure DocumentDB Collections (2 min)
 
-### Step 1 — Start the API (2 min)
+Browse the raw data the agent is working with — cruise ships and destinations already loaded into Azure DocumentDB.
 
-Navigate to the `/api` directory and start the FastAPI server:
+Mention that the extension makes it possible to view.
 
-```bash
-python app.py
-```
+1. In the editor, open the **Azure** extension.
+1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
+1. Browse through the **destinations** and **ships**  collections to view the documents stored within Azure DocumentDB.
 
-The server starts at `http://127.0.0.1:8000`. Open the interactive API docs in your browser:
-
-```
-http://127.0.0.1:8000/docs
-```
-
-**Get a session ID** — the agent uses this to track your conversation history in DocumentDB.
-
-1. Expand the **`GET /session/`** endpoint
-2. Click **Try it out** → **Execute**
-3. Copy the session ID from the response — you'll use it in the next step
-
-**Send your first message** to the agent:
-
-1. Expand **`POST /agent/agent_chat`** → **Try it out**
-2. Use this request body, substituting your session ID:
-
-```json
-{
-  "input": "I want to take a relaxing vacation.",
-  "session_id": "<your-session-id>"
-}
-```
-
-3. Click **Execute** and observe the response — the agent returns cruise recommendations sourced from a **vector similarity search** against the `ships` collection in DocumentDB.
+> 💡 Select a document and click the eye icon to view the selected document.
 
 ---
 
-### Step 2 — Inspect what DocumentDB is doing (5 min)
+### Start the API (1 min)
 
-Open the `/api` directory in your editor and find the agent tools — look in the `service/` folder (or equivalent). You're looking for three tools:
+Spin up the FastAPI server that hosts the travel agent.
 
-| Tool | What it does |
-|---|---|
-| `vacation_lookup` | Runs a **vector similarity search** against the `ships` collection to find relevant cruises |
-| `itinerary_lookup` | Retrieves cruise package details and schedules for a specific ship |
-| `book_cruise` | Writes a booking document to DocumentDB and validates passenger info |
-
-**Trigger all three tools** by continuing the conversation in Swagger. Use the same session ID and send:
-
-```json
-{
-  "input": "Book me a cruise on the [ship name from previous response] for 2 passengers.",
-  "session_id": "<your-session-id>"
-}
-```
-
-Notice that:
-- The agent uses **`itinerary_lookup`** to find available packages for that ship
-- It uses **`book_cruise`** to write a booking record back to DocumentDB
-- Your **conversation history** from both turns is automatically stored in the `travel.history` collection — the agent remembers what you said in step 1
-
-This is Azure DocumentDB acting as the agent's complete memory layer: vector store, document store, and session store in one place.
+1. In the terminal, run the command: `python workshop-documentdb/api/app.py`
+1. Start the FastAPI server: `python app.py`
+1. The server starts at `http://127.0.0.1:8000`. Open the interactive API docs in your browser and add `/docs` at the end of the URL (ex: https://bug-free-waffle-4wq6vxg7v627jp-8000.app.github.dev/docs).
 
 ---
 
-### Step 3 — Challenge: Tune the vector search threshold (2 min)
+### Get a Session ID (30 seconds)
 
-Find the `vacation_lookup` tool in the code. Locate the vector similarity search call — it filters results by a `score` threshold (something like `score >= 0.75`).
+The agent uses a session ID to tie your conversation turns together and persist history in DocumentDB.
 
-Try adjusting this value:
-
-- **Raise it** (e.g. `0.90`) — the agent becomes more selective; it may return fewer or no results for vague queries
-- **Lower it** (e.g. `0.50`) — the agent casts a wider net; results may be less relevant
-
-Re-run the same *"I want a relaxing vacation"* query after each change and compare the recommendations. This makes the DocumentDB vector search behavior directly observable.
+1. Expand the **GET /session/** endpoint.
+1. Click **Try it out** > **Execute**.
+1. Copy the `session ID` from the response, you'll use it in the next step.
 
 ---
 
-### Step 4 - Reflect (1 min)
+### Chat with the AI Travel Agent (2 min)
 
-| What you did | Azure DocumentDB capability |
-|---|---|
-| Agent returned cruise recommendations from a natural language query | **Vector search** — semantic similarity over embeddings |
-| Agent retrieved itinerary details for a specific ship | **Document store** — structured document reads |
-| Agent wrote a booking record | **Document store** — document writes |
-| Second message remembered the first | **Session-based conversation history** — persisted in DocumentDB |
+Ask the agent about travel destinations and cruise ships — each response is grounded in data retrieved directly from Azure DocumentDB.
 
-Azure DocumentDB handled all four of these without any additional infrastructure.
+1. Expand **POST /agent/agent_chat**
+1. Click **Try it out**.
+1. Update the request body, substituting your session ID:
+
+    ```json
+    {
+      "input": "What is there to do in Barbados?",
+      "session_id": "<your-session-id>"
+    }
+    ```
+1. Click **Execute** and review the response. The agent returns a summary of activities to do in Barbados, sourced from a **vector similarity search** against the `travel.destinations` collection in Azure DocumentDB. If you look in the terminal, you will see output for the [TBD] tool call.
+1. Update the request body, substituting your session ID:
+
+    ```json
+    {
+      "input": "Recommend an itinerary for the 'Adventures of the Ocean' ship.",
+      "session_id": "<your-session-id>"
+    }
+    ```
+
+1. Click **Execute** and review the response. The agent returns a proposed itinerary, sourced from a **vector similarity search** against the `travel.ships` collection in Azure DocumentDB.
+
+---
+
+### Book a Cruise (1 min)
+
+Put the agent to work by booking a cruise — it'll ask for the details it needs and write the booking record to DocumentDB.
+
+1. In the browser, update the request body, substituting your session ID:
+
+    ```json
+    {
+      "input": "Book me a cruise for the Adventures of the Ocean.",
+      "session_id": "<your-session-id>"
+    }
+    ```
+1. When prompted by the agent, answer all follow up questions by updating the request body `input` and clicking **Execute**.
+1. Once the agent has the information needed, it'll book the cruise and provide you with a reference number.
+
+---
+
+### Review Conversation History (1.5 min)
+
+1. In the editor, open the **Azure** extension.
+1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
+1. Expand the **history** > **Documents** to view the conversation history stored within Azure DocumentDB.
+
+> 💡 Select a document and click the eye icon to view the selected document.
+
+---
+
+### Reflection
+
+Take a moment to connect what you just did to the Azure DocumentDB capabilities that made it possible.
+
+- **Vector search** — the agent matched your natural language query to relevant cruises using semantic similarity over embeddings
+- **Document store (reads)** — the agent retrieved itinerary details for a specific ship from a stored document
+- **Document store (writes)** — the agent wrote your booking record back to DocumentDB
+- **Session history** — every turn of your conversation was persisted in the `travel.history` collection, so the agent remembered context across messages
+
+Azure DocumentDB handled all four of these without any additional infrastructure!
 
 ---
 

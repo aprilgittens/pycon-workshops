@@ -12,7 +12,9 @@
       "extensions": [
         "GitHub.copilot",
         "GitHub.copilot-chat",
-        "ms-python.python"
+        "ms-python.python",
+        "ms-azuretools.vscode-azureresourcegroups",
+        "ms-azuretools.vscode-documentdb"
       ]
     }
   }

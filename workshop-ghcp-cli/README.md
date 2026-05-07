@@ -18,11 +18,11 @@ If prompted to **trust the files in this folder**, select `Yes`.
 
 ---
 
-## Choose a model (1 min)
+## Choose a Model (1 min)
 
 Before starting, switch Copilot to a model that's well-suited for this task.
 
-1. In the CLI, enter `/model
+1. In the CLI, enter `/model`.
 1. Select `Claude Haiku 4.5`.
 1. Press **Enter**.
 
