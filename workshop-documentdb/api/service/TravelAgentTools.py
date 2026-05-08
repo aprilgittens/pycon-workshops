@@ -1,5 +1,5 @@
 from langchain_core.tools import tool
-from langchain.docstore.document import Document
+from langchain_core.documents import Document
 from data.mongodb import travel
 from model.travel import Ship
 

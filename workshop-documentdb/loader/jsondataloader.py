@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 from typing import List, Optional, Union
 import uuid
-from langchain.docstore.document import Document
-from langchain.document_loaders.base import BaseLoader
+from langchain_core.documents import Document
+from langchain_core.document_loaders import BaseLoader
 
 
 class JSONDataLoader(BaseLoader):

@@ -1,5 +1,5 @@
 from .init import client, vector_store
-from langchain.docstore.document import Document
+from langchain_core.documents import Document
 from typing import List, Optional, Union
 
 from model.travel import Ship,Itinerary
