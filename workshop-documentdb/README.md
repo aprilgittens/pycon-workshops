@@ -27,7 +27,7 @@ Mention that the extension makes it possible to view.
 
 1. In the editor, open the **Azure** extension.
 1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
-1. Browse through the **destinations** and **ships**  collections to view the documents stored within Azure DocumentDB.
+1. Select **documents** within the **destinations** and **ships**  collections to view the documents stored within Azure DocumentDB. **Documents** in the **ships** collection include vector embedding arrays used for similarity search.
 
 > 💡 Select a document and click the eye icon to view the selected document.
 
