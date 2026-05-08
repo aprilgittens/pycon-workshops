@@ -37,7 +37,7 @@ Follow the instructions in the [Quickstart: Create an Azure DocumentDB cluster b
 1. On the **text-embedding-3-small** page, click **Use this model** to deploy the model.
 1. In the **Deploy text-embedding-3-small** window, click **Deploy**.
 
-## Deploy the GPT-5.4 model
+## Deploy the gpt-5.4 model
 
 1. In the Foundry portal, navigate to the **Model catalog**.
 1. In the **Model catalog** search for `gpt-5.4`.
@@ -48,14 +48,14 @@ Follow the instructions in the [Quickstart: Create an Azure DocumentDB cluster b
 
 You will need the following environment variables:
 
-```.env
-AZURE_OPENAI_ENDPOINT="https://<your-resource>.openai.azure.com/"
-AZURE_OPENAI_API_KEY="<your Azure OpenAI key>"
-AZURE_OPENAI_API_VERSION="2025-04-01-preview"
-AZURE_OPENAI_EMBEDDING_DEPLOYMENT="<your embedding deployment name>"
-MONGO_CONNECTION_STRING="mongodb+srv:<your connection string from Azure DocumentDB>"
-AZURE_OPENAI_CHAT_DEPLOYMENT=
-```
+| Variable | Where to find it |
+|---|---|
+| AZURE_OPENAI_ENDPOINT | Azure Portal > Azure OpenAI Resource > Resource Management > Keys and Endpoint |
+| AZURE_OPENAI_API_KEY | Azure Portal > Azure OpenAI Resource > Resource Management > Keys and Endpoint |
+| AZURE_OPENAI_API_VERSION | 2025-04-01-preview |
+| AZURE_OPENAI_EMBEDDING_DEPLOYMENT | Microsoft Foundry Portal > Project > Deployments |
+| MONGO_CONNECTION_STRING | Azure Portal > Azure DocumentDB resource > Settings > Connection strings |
+| AZURE_OPENAI_CHAT_DEPLOYMENT | Microsoft Foundry Portal > Build > Models |
 
 ## Load travel documents into Azure DocumentDB
 
@@ -103,6 +103,10 @@ Test that the AI agent functions as expected.
 You will need to sign-in to Azure via the Azure Resources extension. The extension should already be installed in the Codespace.
 
 1. In VS Code, in the left Activity Bar, click the **Azure** icon.
+1. In the **Azure** extension, click **Sign in to Azure...**.
+1. Once you've signed in, expand **[tbd tenant name]** > **Azure DocumentDB** > **[tbd resource name]**.
+1. When prompted, enter the **username** and **password** for the **DocumentDB cluster**.
+1. After you've signed in, confirm that you're able to view the **travel** database for the cluster.
 
 ## Reset the lab
 

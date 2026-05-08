@@ -26,7 +26,7 @@ Before running the agent, take a look at the three tools it uses to read from an
 Browse the raw data the agent is working with — cruise ships and destinations already loaded into Azure DocumentDB.
 
 1. In the editor, open the **Azure** extension.
-1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
+1. Expand **[tbd tenant name]** > **Azure DocumentDB** > **[tbd resource name]** > **travel**.
 1. Select **documents** within the **destinations** and **ships**  collections to view the documents stored within Azure DocumentDB. **Documents** in the **ships** collection include vector embedding arrays used for similarity search.
 
 > 💡 Select a document and click the eye icon to view the selected document.
@@ -101,7 +101,7 @@ Put the agent to work by booking a cruise — it'll ask for the details it needs
 ## Review Conversation History (1.5 min)
 
 1. In the editor, open the **Azure** extension.
-1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
+1. Expand **[tbd tenant name]** > **Azure DocumentDB** > **[tbd resource name]** > **travel**.
 1. Expand the **history** > **Documents** to view the conversation history stored within Azure DocumentDB.
 
 > 💡 Select a document and click the eye icon to view the selected document.
