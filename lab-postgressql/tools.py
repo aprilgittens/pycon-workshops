@@ -70,7 +70,7 @@ async def _embed(text: str) -> list[float]:
 
 async def lookup_order(order_id: str) -> str:
     """
-    Look up an order's date and product category from the PostgreSQL orders
+    Look up an order's dates and product category from the PostgreSQL orders
     database.  Always call this first when a customer mentions an order ID.
 
     Args:
@@ -78,7 +78,7 @@ async def lookup_order(order_id: str) -> str:
 
     Returns:
         A JSON string with order_id, customer_name, product_name,
-        product_category, order_date, status, and total_amount.
+        product_category, order_date, delivery_date, status, and total_amount.
         Returns an error JSON if the order is not found.
     """
     oid = order_id.strip().upper()
@@ -87,7 +87,7 @@ async def lookup_order(order_id: str) -> str:
     print(f"\n{'─'*60}")
     print(f"  [TOOL] lookup_order  →  SQL query")
     print(f"{'─'*60}")
-    print(f"  Query : SELECT order_date, product_category, ...")
+    print(f"  Query : SELECT order_date, delivery_date, product_category, ...")
     print(f"          FROM orders JOIN customers")
     print(f"          WHERE order_id = '{oid}'")
     # ───────────────────────────────────────────────────────────────────────
@@ -99,6 +99,7 @@ async def lookup_order(order_id: str) -> str:
         """
         SELECT o.order_id,
                o.order_date,
+               o.delivery_date,
                o.product_name,
                o.product_category,
                o.status,
@@ -120,6 +121,7 @@ async def lookup_order(order_id: str) -> str:
             "product_name":     row["product_name"],
             "product_category": row["product_category"],
             "order_date":       str(row["order_date"]),
+            "delivery_date":    str(row["delivery_date"]),
             "status":           row["status"],
             "total_amount":     float(row["total_amount"]),
         }

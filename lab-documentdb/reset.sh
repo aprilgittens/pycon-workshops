@@ -3,6 +3,6 @@
 # Called by reset-all.sh on codespace reload.
 
 echo "🔄 Resetting DocumentDB workshop..."
-git checkout -- workshop-documentdb/
-git clean -fd workshop-documentdb/
+git checkout -- lab-documentdb/
+git clean -fd lab-documentdb/
 echo "✅ DocumentDB workshop ready!"

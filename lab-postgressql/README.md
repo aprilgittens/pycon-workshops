@@ -8,7 +8,7 @@ Query a PostgreSQL database and a vector search index in real time, then explore
 
 Launch the agent from your terminal to start an interactive customer support session.
 
-In the terminal, run the command `python workshop-postgressql/chat.py`
+In the terminal, run the command `python lab-postgressql/chat.py`
 
 You will see the startup banner with a list of demo order IDs and sample questions.
 
@@ -48,7 +48,7 @@ Put the date-window logic to the test by trying orders on both sides of the 30-d
     You: I want to return order ORD-001.
     ```
 
-    `ORD-001` was delivered 45 days ago. Notice how the agent correctly says
+    `ORD-001` was delivered more than days ago. Notice how the agent correctly says
     the order is outside the return window. It computed this from the `order_date`
     returned by the SQL query and the window stated in the policy document.
 

@@ -4,8 +4,8 @@
 
 echo "🔄 Resetting all workshops to clean state..."
 
-bash workshop-ghcp-cli/reset.sh
-bash workshop-documentdb/reset.sh
-bash workshop-postgressql/reset.sh
+bash lab-ghcp-cli/reset.sh
+bash lab-documentdb/reset.sh
+bash lab-postgressql/reset.sh
 
 echo "✅ All workshops ready to go!"

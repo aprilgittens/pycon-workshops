@@ -47,7 +47,7 @@ Review the changes Copilot proposes before approving. Once done, take a quick lo
 Now that the code is documented, switch Copilot to **plan** mode before asking it to write tests.
 
 1. In the CLI, press **`Shift + Tab`** to toggle into plan mode.
-1. Submit the prompt: `Create a pytest test suite for the code in the @workshop-ghcp-cli/ folder. Write tests for check_answer, calculate_score, format_result, and display_score. Cover normal cases and edge cases. Save the test file as workshop-ghcp-cli/test_quiz.py.`
+1. Submit the prompt: `Create a pytest test suite for the code in the @lab-ghcp-cli/ folder. Write tests for check_answer, calculate_score, format_result, and display_score. Cover normal cases and edge cases. Save the test file as lab-ghcp-cli/test_quiz.py.`
 
     > Copilot will ask clarifying questions and build a plan. Copilot will likely notice the oustanding bug in the code. If prompted to create a test that'll identify the bug/fail due to the bug), select to do so. 
 
@@ -56,7 +56,7 @@ Now that the code is documented, switch Copilot to **plan** mode before asking i
 1. Once you approve the plan, Copilot will create a `test_quiz.py` file. If Copilot doesn't request to run the test, you can do so manually:
 
     ```bash
-    ! python -m pytest workshop-ghcp-cli/test_quiz.py -v
+    ! python -m pytest lab-ghcp-cli/test_quiz.py -v
     ```
 
     **Note**: You can execute a command in your local shell with the **!** command, bypassing Copilot.
@@ -74,7 +74,7 @@ Let's now fix the bug in the `quiz.py` file.
 1. Once Copilot applies the fix, run the tests again:
 
     ```bash
-    ! python -m pytest workshop-ghcp-cli/test_quiz.py -v
+    ! python -m pytest lab-ghcp-cli/test_quiz.py -v
     ```
 
 > All tests should pass. ✅
@@ -86,7 +86,7 @@ Let's now fix the bug in the `quiz.py` file.
 Try taking the quiz! In a new terminal, run the command:
 
 ```bash
-python workshop-ghcp-cli/quiz.py
+python lab-ghcp-cli/quiz.py
 ```
 
 ---

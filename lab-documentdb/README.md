@@ -8,7 +8,7 @@ Ever wonder what's happening when an AI agent "remembers" things? Run this trave
 
 Before running the agent, take a look at the three tools it uses to read from and write to Azure DocumentDB.
 
-1. In the **Explorer** of the editor, navigate to **workshop-documentdb** > **api** > **service** > **TravelAgentTools.py**.
+1. In the **Explorer** of the editor, navigate to **lab-documentdb** > **api** > **service** > **TravelAgentTools.py**.
 1. View what each tool does: 
 
   | Tool | What it does |
@@ -23,8 +23,6 @@ Before running the agent, take a look at the three tools it uses to read from an
 
 Browse the raw data the agent is working with — cruise ships and destinations already loaded into Azure DocumentDB.
 
-Mention that the extension makes it possible to view.
-
 1. In the editor, open the **Azure** extension.
 1. Expand **[tbd tenant name]** > **[Azure DocumentDB]** > **[tbd resource name]** > **travel**.
 1. Select **documents** within the **destinations** and **ships**  collections to view the documents stored within Azure DocumentDB. **Documents** in the **ships** collection include vector embedding arrays used for similarity search.
@@ -37,7 +35,7 @@ Mention that the extension makes it possible to view.
 
 Spin up the FastAPI server that hosts the travel agent.
 
-1. In the terminal, run the command: `python workshop-documentdb/api/app.py`
+1. In the terminal, run the command: `python lab-documentdb/api/app.py`
 1. Start the FastAPI server: `python app.py`
 1. The server starts at `http://127.0.0.1:8000`. Open the interactive API docs in your browser and add `/docs` at the end of the URL (ex: https://bug-free-waffle-4wq6vxg7v627jp-8000.app.github.dev/docs).
 
