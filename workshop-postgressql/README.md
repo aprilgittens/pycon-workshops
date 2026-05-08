@@ -68,7 +68,7 @@ Dig into the two tool functions that power the agent's data access and see exact
 
 1. Open `tools.py` and look at two functions:
 
-    `lookup_order` (line ~60)
+    `lookup_order` (line ~71)
     ```python
     row = await _pool.fetchrow(
         """
@@ -84,7 +84,7 @@ Dig into the two tool functions that power the agent's data access and see exact
     `asyncpg` sends the query and the parameter separately. the database engine
     never sees them concatenated, making SQL injection impossible.
 
-1. `fetch_return_policy` (line ~115)
+1. `fetch_return_policy` (line ~136)
     ```python
     embedding = await _embed(search_text)          # 1536-dim vector via Azure OpenAI
 
@@ -114,12 +114,14 @@ chunks and uploaded with pre-computed embeddings.
 
 Go off-script and see how the agent handles edge cases and variations it wasn't explicitly tested for. Each response is still grounded in live data from PostgreSQL and Azure AI Search.
 
+> 💡 **Order IDs:** All demo orders (ORD-001 through ORD-010) are defined in `setup/seed_db.py` if you want to browse products, categories, and delivery dates before chatting.
+
 Some ideas:
 
 - My laptop arrived broken. Order ORD-007. What can I do?
 - Is there a restocking fee if I return an opened TV?
 - I lost the box for my AirPods. Can I still return order ORD-006?
-- What orders do I have?   ← the agent will ask for an order ID
+- What orders do I have? (**Note**: the agent will ask for an Order ID)
 
 ---
 
