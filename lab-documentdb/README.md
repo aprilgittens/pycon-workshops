@@ -2,6 +2,8 @@
 
 Ever wonder what's happening when an AI agent "remembers" things? Run this travel agent, dig into the code, and watch Azure DocumentDB do the heavy lifting — vector search, document storage, and conversation history all at once!
 
+> This workshop is based on the [Travel AI Agent React FastAPI and Cosmos DB Vector Store](https://github.com/jonathanscholtes/Travel-AI-Agent-React-FastAPI-and-Cosmos-DB-Vector-Store) project by Jonathan Scholtes.
+
 ---
 
 ## Inspect what Azure DocumentDB is doing (2 min)

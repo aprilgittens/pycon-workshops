@@ -1,22 +1,17 @@
-pytest
+# API Server Dependencies
 fastapi
-uvicorn
-weaviate-client==3.24.1
+uvicorn[standard]
+gunicorn
 python-dotenv==1.0.0
+
+# MongoDB
 pymongo==4.6.3
-tiktoken
+
+# LangChain & AI
 langchain-openai>=0.3.0
-langchain>=0.3.0
-langchain-community>=0.3.0
-langchain-mongodb
 langchain-core>=0.3.0
-azure-storage-blob
-azure-identity
-psycopg
-psycopg-binary
-psycopg-pool
+langchain-community>=0.3.0
+langgraph>=0.2.0
+
+# Data Models
 pydantic
-agent-framework
-nest_asyncio
-ipykernel
-httpx<0.28

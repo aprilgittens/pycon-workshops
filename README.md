@@ -1,4 +1,4 @@
-# PyCon Labs
+# PyCon 2026 Labs
 
 Welcome! This repo contains a collection of hands-on labs built for PyCon 2026. Each lab is self-contained and designed to run entirely inside a **GitHub Codespace** — no local setup required. Just open the Codespace, pick a lab, and start building!
 
@@ -6,7 +6,7 @@ Welcome! This repo contains a collection of hands-on labs built for PyCon 2026. 
 
 ## For Administrators
 
-**Important:** Before running these labs with participants, complete all setup instructions available in **[placeholder]**. This includes provisioning Azure resources, configuring authentication, and verifying connectivity for all required services.
+**Important:** Before running these labs with participants, complete all setup instructions available in the **ADMIN.md** files for `lab-documentdb` and `lab-postgressql`. This includes provisioning Azure resources, configuring authentication, and verifying connectivity for all required services.
 
 ---
 
